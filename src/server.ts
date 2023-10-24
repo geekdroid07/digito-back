@@ -4,12 +4,12 @@ import app from './app';
 // import './infrastructure/database/dbEngines/mongodb/connection';
 
 app
-  .listen(port, (err, address) => {
+  .listen(8080, (err, address) => {
     if (err) {
       Logger.error(err)
     }
     Logger.info(`
-    Alfa is running at http://localhost:${port}
+    Alfa is running at ${address}:${port}
     Environment: ${environment}
   `);
   });

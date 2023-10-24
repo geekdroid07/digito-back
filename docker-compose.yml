@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - "$PORT:$PORT"
+      - "8080:8080"
     deploy:
       resources:
         limits:
