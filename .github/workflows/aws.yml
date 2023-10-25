@@ -82,3 +82,12 @@ jobs:
         IMAGES_TO_DELETE=$(aws ecr list-images --region $ECR_REGION --repository-name $ECR_REPOSITORY --filter "tagStatus=UNTAGGED" --query 'imageIds[*]' --output json)
         aws ecr batch-delete-image --region $ECR_REGION --repository-name $ECR_REPOSITORY --image-ids "$IMAGES_TO_DELETE" || true
   
+    - name: Create kubeconfig
+      run: |
+          mkdir ${HOME}/.kube
+          echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
+          cat ${HOME}/.kube/config
+    - name: Use context
+      run: kubectl config use-context arn:aws:eks:us-east-1:761195924890:cluster/smartfood
+    - name: Deploy to K8s
+      run: kubectl rollout restart deployment digito-kube-deploy

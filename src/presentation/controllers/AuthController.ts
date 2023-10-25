@@ -11,8 +11,7 @@ class AuthController {
   async RestrictedUser(req: FastifyRequest, reply: FastifyReply): Promise<void> {
     try {
       const token = req.headers['x-jwt'];
-      debugger
-      const decoded = await JWT.decode(token.toString());
+      const decoded = await JWT.validate(token.toString());
       if (typeof decoded === 'object' && decoded.hasOwnProperty('user')) {
         req['user'] = decoded['user'];
       }

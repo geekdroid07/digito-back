@@ -26,7 +26,7 @@ export default class JWT {
   public static async validate(token: string): Promise<JwtPayload> {
     try {
       // @ts-ignore
-      return (await promisify(verify)(token, cert)) as JwtPayload;
+      return (await promisify(verify)(token)) as JwtPayload;
     } catch (e) {
       Logger.debug(e);
       if (e && e.name === "TokenExpiredError") throw new TokenExpiredError();

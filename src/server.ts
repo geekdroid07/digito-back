@@ -4,7 +4,7 @@ import app from './app';
 // import './infrastructure/database/dbEngines/mongodb/connection';
 
 app
-  .listen(8080, (err, address) => {
+  .listen(port, (err, address) => {
     if (err) {
       Logger.error(err)
     }
